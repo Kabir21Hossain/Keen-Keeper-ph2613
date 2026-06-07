@@ -8,8 +8,6 @@ import { TfiStatsUp } from "react-icons/tfi";
 const Navbar = () => {
     const pathname = usePathname();
 
-
-
     const links = <>
         <li><Link href="/" className={`${pathname == '/' ? 'bg-[#244D3F] text-white' : 'bg-gray-100 text-black'} font-semibold rounded-lg`}> <span className="-mr-2"><CiHome /></span>Home</Link></li>
         <li><Link href="/timeline" className={`${pathname == '/timeline' ? 'bg-[#244D3F] text-white' : 'bg-gray-100 text-black'} font-semibold rounded-lg`}> <span className="-mr-2"><MdAccessTime /></span>Timeline</Link></li>
@@ -31,7 +29,7 @@ const Navbar = () => {
                         </ul>
 
                     </div>
-                    <Link href="/" className="text-2xl font-extrabold"> Keen <span className="text-[#244D3F]">Keeper</span></Link>
+                    <Link href="/" className="text-2xl font-extrabold text-black"> Keen <span className="text-[#244D3F]">Keeper</span></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">

@@ -24,7 +24,9 @@ export default function RootLayout({ children }) {
 
         <Navbar />
 
-        {children}
+        <main className="grow">
+          {children}
+        </main>
 
         <Footer />
 

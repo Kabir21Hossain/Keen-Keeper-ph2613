@@ -6,7 +6,10 @@
     "email": "john.doe@example.com",
     "days_since_contact": 12,
     "status": "overdue",
-    "tags": ["college", "close friend"],
+    "tags": [
+      "college",
+      "close friend"
+    ],
     "bio": "Met in university. Love hiking together.",
     "goal": 14,
     "next_due_date": "2026-08-21"
@@ -18,7 +21,10 @@
     "email": "sarah.johnson@example.com",
     "days_since_contact": 5,
     "status": "on_track",
-    "tags": ["coworker", "design"],
+    "tags": [
+      "coworker",
+      "design"
+    ],
     "bio": "Former teammate from a startup project.",
     "goal": 14,
     "next_due_date": "2026-08-30"
@@ -30,7 +36,10 @@
     "email": "michael.brown@example.com",
     "days_since_contact": 21,
     "status": "overdue",
-    "tags": ["mentor", "career"],
+    "tags": [
+      "mentor",
+      "career"
+    ],
     "bio": "Guides me on software engineering and leadership.",
     "goal": 14,
     "next_due_date": "2026-08-12"
@@ -42,7 +51,10 @@
     "email": "emily.davis@example.com",
     "days_since_contact": 2,
     "status": "on_track",
-    "tags": ["gym", "fitness"],
+    "tags": [
+      "gym",
+      "fitness"
+    ],
     "bio": "Workout partner from the local fitness club.",
     "goal": 7,
     "next_due_date": "2026-08-14"
@@ -54,7 +66,10 @@
     "email": "david.wilson@example.com",
     "days_since_contact": 9,
     "status": "due_soon",
-    "tags": ["business", "networking"],
+    "tags": [
+      "business",
+      "networking"
+    ],
     "bio": "Met at a tech conference in Dhaka.",
     "goal": 10,
     "next_due_date": "2026-08-18"
@@ -66,7 +81,10 @@
     "email": "olivia.martinez@example.com",
     "days_since_contact": 1,
     "status": "on_track",
-    "tags": ["family", "cousin"],
+    "tags": [
+      "family",
+      "cousin"
+    ],
     "bio": "Lives abroad and visits occasionally.",
     "goal": 30,
     "next_due_date": "2026-09-10"
@@ -78,7 +96,10 @@
     "email": "james.anderson@example.com",
     "days_since_contact": 15,
     "status": "overdue",
-    "tags": ["university", "research"],
+    "tags": [
+      "university",
+      "research"
+    ],
     "bio": "Worked together on an AI research project.",
     "goal": 14,
     "next_due_date": "2026-08-13"
@@ -90,7 +111,10 @@
     "email": "sophia.taylor@example.com",
     "days_since_contact": 6,
     "status": "on_track",
-    "tags": ["book club", "reading"],
+    "tags": [
+      "book club",
+      "reading"
+    ],
     "bio": "Discusses books and productivity habits.",
     "goal": 14,
     "next_due_date": "2026-08-29"
@@ -102,7 +126,10 @@
     "email": "daniel.thomas@example.com",
     "days_since_contact": 13,
     "status": "due_soon",
-    "tags": ["freelance", "developer"],
+    "tags": [
+      "freelance",
+      "developer"
+    ],
     "bio": "Collaborated on multiple web development projects.",
     "goal": 14,
     "next_due_date": "2026-08-22"
@@ -114,7 +141,10 @@
     "email": "ava.garcia@example.com",
     "days_since_contact": 28,
     "status": "overdue",
-    "tags": ["travel", "friend"],
+    "tags": [
+      "travel",
+      "friend"
+    ],
     "bio": "Met during a backpacking trip in Nepal.",
     "goal": 21,
     "next_due_date": "2026-08-05"

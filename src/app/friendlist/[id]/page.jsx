@@ -1,10 +1,54 @@
+"use client"
+
 import Image from "next/image";
 import { RiDeleteBin6Line, RiNotificationSnoozeLine } from "react-icons/ri";
 import { GoArchive } from "react-icons/go";
 import { LuPhoneCall, LuMessageSquare, LuVideo } from "react-icons/lu";
+import { UseDataContext } from "@/context/DataContext";
 
 
 const Friend = async ({ params }) => {
+
+    const { data, setData } = UseDataContext();
+
+    const handleAudioCall = () => {
+        const obj = {
+            date: Date.now(),
+            type: "audio",
+            timestamp: new Date().toISOString(),
+            name: friend.name,
+
+        }
+
+        setData([...data, obj]);
+
+    }
+
+    const handleText = () => {
+
+        const obj = {
+            date: Date.now(),
+            type: "text",
+            timestamp: new Date().toISOString(),
+            name: friend.name,
+        }
+
+        setData([...data, obj]);
+
+    }
+
+    const handleVideoCall = () => {
+        const obj = {
+            date: Date.now(),
+            type: "video",
+            timestamp: new Date().toISOString(),
+            name: friend.name,
+        }
+        setData([...data, obj]);
+
+    }
+
+
 
     const { id } = await params;
 
@@ -14,117 +58,118 @@ const Friend = async ({ params }) => {
 
     }
 
-    const data = await res.json();
+    const friendsData = await res.json();
 
-    const friend = data.find((fr) => fr.id === parseInt(id));
+    const friend = friendsData.find((fr) => fr.id === parseInt(id));
     if (!friend) {
         return (
-            <div className="px-[245px] py-20">
+            <div className="w-full px-4 py-20 sm:px-6 lg:px-10">
                 <p className="text-gray-700 text-center">Friend not found.</p>
             </div>
         );
     }
 
     return (
-        <div className="px-[180px] py-20 flex flex-col md:flex-row gap-6">
+        <div className="w-full px-4 py-10 sm:px-6 lg:px-10">
+            <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 md:flex-row">
+                <div className="grid w-full grid-cols-1">
+                    <div className="upper w-full max-w-xl space-y-4">
 
-            <div className="grid grid-cols-1 w-4xl">
+                        <div className="user-card w-full flex flex-col items-center shadow-2xl rounded-xl bg-[#fff] py-6 hover:shadow-3xl transition-shadow">
+                            <Image src={friend.picture} alt={friend.name} width={80} height={80} className="rounded-full object-cover mb-3" />
+                            <h2 className="text-lg font-semibold">{friend.name}</h2>
 
-                <div className="upper w-[350px] space-y-4">
+                            <p className={`${friend.status.toLowerCase() === 'overdue' ? 'bg-[#EF4444]' : friend.status.toLowerCase() === 'on_track' ? 'bg-[#244D3F]' : 'bg-[#EFAD44]'} text-sm mt-2 mb-2 text-white rounded-full py-1 px-3 capitalize`}>
+                                {friend.status.split('_').join(' ')}
+                            </p>
+                            <p className="text-sm bg-[#CBFADB] text-[#244D3F] py-1 px-3 rounded-full">
+                                {friend.tags?.[0]?.toUpperCase()}
+                            </p>
 
-                    <div className="user-card w-full flex flex-col items-center shadow-2xl rounded-xl bg-[#fff] py-6 hover:shadow-3xl transition-shadow">
-                        <Image src={friend.picture} alt={friend.name} width={80} height={80} className="rounded-full object-cover mb-3" />
-                        <h2 className="text-lg font-semibold">{friend.name}</h2>
+                            <p className=" my-2 text-center text-gray-400 text-sm italic font-semibold">{`"${friend.bio}"`}</p>
+                            <p className="text-center text-[14px] text-gray-400 ">Gmail: {friend.email}</p>
+                        </div>
 
-                        <p className={`${friend.status.toLowerCase() === 'overdue' ? 'bg-[#EF4444]' : friend.status.toLowerCase() === 'on_track' ? 'bg-[#244D3F]' : 'bg-[#EFAD44]'} text-sm mt-2 mb-2 text-white rounded-full py-1 px-3 capitalize`}>
-                            {friend.status.split('_').join(' ')}
-                        </p>
-                        <p className="text-sm bg-[#CBFADB] text-[#244D3F] py-1 px-3 rounded-full">
-                            {friend.tags?.[0]?.toUpperCase()}
-                        </p>
+                        <div className="lower">
+                            <div className="function-btn flex flex-col gap-2">
+                                <button className="bg-[#fff] shadow-xl btn text-black py-2 px-4 rounded-lg  transition-colors">
+                                    <RiNotificationSnoozeLine /> Snooze 2 weeks
+                                </button>
+                                <button className="bg-[#fff] shadow-xl btn text-black py-2 px-4 rounded-lg  transition-colors">
+                                    <GoArchive /> Archive
+                                </button>
+                                <button className="bg-[#fff] shadow-xl btn text-red-500 py-2 px-4 rounded-lg hover:bg-[#d93838] hover:text-white transition-colors">
+                                    <RiDeleteBin6Line /> Delete
+                                </button>
+                            </div>
 
-                        <p className=" my-2 text-center text-gray-400 text-sm italic font-semibold">{`"${friend.bio}"`}</p>
-                        <p className="text-center text-[14px] text-gray-400 ">Gmail: {friend.email}</p>
+
+                        </div>
+
                     </div>
 
-                    <div className="lower">
-                        <div className="function-btn flex flex-col gap-2">
-                            <button className="bg-[#fff] shadow-xl btn text-black py-2 px-4 rounded-lg  transition-colors">
-                                <RiNotificationSnoozeLine /> Snooze 2 weeks
+
+                </div>
+
+                <div className="flex flex-col gap-6">
+
+                    <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
+                        <div className="shadow-xl rounded-lg bg-white p-4 flex flex-col items-center justify-center text-center">
+                            <h3 className="text-lg font-bold text-[#244D3F] truncate whitespace-nowrap">{friend.days_since_contact}</h3>
+                            <p className="text-gray-500 text-sm truncate whitespace-nowrap">Days Since Contact</p>
+                        </div>
+
+                        <div className="shadow-xl rounded-lg bg-white p-4 flex flex-col items-center justify-center text-center">
+                            <h3 className="text-lg font-bold text-[#244D3F] truncate whitespace-nowrap">{friend.goal}</h3>
+                            <p className="text-gray-500 text-sm truncate whitespace-nowrap">Goal(days)</p>
+                        </div>
+
+                        <div className="shadow-xl rounded-lg bg-white p-4 flex flex-col items-center justify-center text-center">
+                            <h3 className="text-lg font-bold text-[#244D3F] truncate whitespace-nowrap">{friend.next_due_date}</h3>
+                            <p className="text-gray-500 text-sm truncate whitespace-nowrap">Next Due</p>
+                        </div>
+                    </div>
+
+                    <div className="relationship-goal p-6 shadow-xl rounded-lg bg-[#ffffff]">
+
+                        <div className="upper flex justify-between items-center">
+                            <h2 className="text-[#244D3F] text-lg font-semibold">Relationship Goal</h2>
+                            <button className='btn text-sm'>Edit</button>
+
+                        </div>
+
+                        <p className="text-gray-500 text-sm">
+                            Connect Every <span className="font-bold text-md">{friend.goal}  days</span>
+                        </p>
+
+                    </div>
+
+                    <div className="flex flex-col shadow-xl rounded-xl p-6 bg-[#ffffff] space-y-4 flex-1 justify-evenly">
+                        <p className="text-[#244D3F] text-sm">Quick Check-In</p>
+
+                        <div className="call-text-video grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <button onClick={handleAudioCall} className="hover:translate-y-0.5 hover:cursor-pointer flex flex-col items-center gap-2 rounded-xl shadow-xl  bg-[#F8FAFC]  p-4  transition-colors">
+                                <LuPhoneCall />
+                                <span>Call</span>
                             </button>
-                            <button className="bg-[#fff] shadow-xl btn text-black py-2 px-4 rounded-lg  transition-colors">
-                                <GoArchive /> Archive
+                            <button onClick={handleText} className=" hover:translate-y-0.5 hover:cursor-pointer flex flex-col items-center gap-2 rounded-xl shadow-xl  bg-[#F8FAFC]  p-4  transition-colors">
+                                <LuMessageSquare />
+                                <span>Text</span>
                             </button>
-                            <button className="bg-[#fff] shadow-xl btn text-red-500 py-2 px-4 rounded-lg hover:bg-[#d93838] hover:text-white transition-colors">
-                                <RiDeleteBin6Line /> Delete
+                            <button onClick={handleVideoCall} className="hover:translate-y-0.5 hover:cursor-pointer flex flex-col items-center gap-2 rounded-xl shadow-xl  bg-[#F8FAFC]  p-4  transition-colors">
+                                <LuVideo />
+                                <span>Video</span>
                             </button>
                         </div>
 
-
                     </div>
-
                 </div>
-
 
             </div>
-
-            <div className="flex flex-col gap-6">
-
-                <div className="flex gap-2 justify-center">
-                    <div className="left shadow-xl rounded-lg bg-[#fff] px-4 py-2 min-w-[150px] h-20 flex flex-col items-center justify-center text-center">
-                        <h3 className="text-lg font-bold text-[#244D3F] truncate whitespace-nowrap">{friend.days_since_contact}</h3>
-                        <p className="text-gray-500 text-sm truncate whitespace-nowrap">Days Since Contact</p>
-                    </div>
-
-                    <div className="middle shadow-xl rounded-lg bg-[#fff] py-4 px-2 min-w-[150px] h-20 flex flex-col items-center justify-center text-center">
-                        <h3 className="text-lg font-bold text-[#244D3F] truncate whitespace-nowrap">{friend.goal}</h3>
-                        <p className="text-gray-500 text-sm truncate whitespace-nowrap">Goal(days)</p>
-                    </div>
-
-                    <div className="shadow-xl rounded-lg bg-[#fff] py-4 px-2 min-w-[150px] h-20 flex flex-col items-center justify-center text-center">
-                        <h3 className="text-lg font-bold text-[#244D3F] truncate whitespace-nowrap">{friend.next_due_date}</h3>
-                        <p className="text-gray-500 text-sm truncate whitespace-nowrap">Next Due</p>
-                    </div>
-
-                </div>
-
-                <div className="relationship-goal p-6 shadow-xl rounded-lg bg-[#ffffff]">
-
-                    <div className="upper flex justify-between items-center">
-                        <h2 className="text-[#244D3F] text-lg font-semibold">Relationship Goal</h2>
-                        <button className='btn text-sm'>Edit</button>
-
-                    </div>
-
-                    <p className="text-gray-500 text-sm">
-                        Connect Every <span className="font-bold text-md">{friend.goal}  days</span>
-                    </p>
-
-                </div>
-
-                <div className="flex flex-col shadow-xl rounded-xl p-6 bg-[#ffffff] space-y-4 flex-1 justify-evenly">
-                    <p className="text-[#244D3F] text-sm">Quick Check-In</p>
-
-                    <div className="call-text-video grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <button className="hover:translate-y-0.5 hover:cursor-pointer flex flex-col items-center gap-2 rounded-xl shadow-xl  bg-[#F8FAFC]  p-4  transition-colors">
-                            <LuPhoneCall />
-                            <span>Call</span>
-                        </button>
-                        <button className=" hover:translate-y-0.5 hover:cursor-pointer flex flex-col items-center gap-2 rounded-xl shadow-xl  bg-[#F8FAFC]  p-4  transition-colors">
-                            <LuMessageSquare />
-                            <span>Text</span>
-                        </button>
-                        <button className="hover:translate-y-0.5 hover:cursor-pointer flex flex-col items-center gap-2 rounded-xl shadow-xl  bg-[#F8FAFC]  p-4  transition-colors">
-                            <LuVideo />
-                            <span>Video</span>
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
-    );
+            );
+    
 }
+
 
 export default Friend;

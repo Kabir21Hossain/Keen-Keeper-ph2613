@@ -1,3 +1,4 @@
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Components/Navbar";
@@ -17,15 +18,19 @@ export const metadata = {
   description: "Assignment 7 - Keen Keeper",
 };
 
+import DataProvider from "@/context/DataContext";
+
 export default function RootLayout({ children }) {
   return (
     <html data-theme='light' lang="en" className={`${geistSans.className} ${geistMono.className} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-screen flex flex-col">
 
         <Navbar />
 
         <main className="grow">
-          {children}
+          <DataProvider>
+            {children}
+          </DataProvider>
         </main>
 
         <Footer />

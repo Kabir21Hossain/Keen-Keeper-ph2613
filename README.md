@@ -95,19 +95,7 @@ flowchart TD
   TimeLinePage --> FilterMenu
 ```
 
-### Data Flow
 
-```mermaid
-flowchart LR
-  DataFile[/public/data.json/] -->|GET /data.json| FriendListPage
-  FriendListPage -->|setState(data)| LocalState
-  LocalState -->|store| DataContext
-  DataContext --> TimelinePage
-  DataContext --> StatPage
-  FriendDetailPage -->|fetch user detail| FriendDetailClient
-```
-
----
 
 ## 📌 Pages and Routes
 

@@ -78,7 +78,7 @@ const StatPage = ({ isAnimationActive = true, defaultIndex = undefined }) => {
 
     if (data.length === 0) {
         return (
-            <div className="flex justify-center items-center bg-blue-200 p-4 rounded-xl shadow-xl">
+            <div className="mx-auto my-20 max-w-4xl flex justify-center items-center bg-blue-200 p-4 rounded-xl shadow-xl flex-1 ">
                 <p> No Phone Call!, No Text!, No Video Call!!! </p>
             </div>
         );
@@ -87,7 +87,7 @@ const StatPage = ({ isAnimationActive = true, defaultIndex = undefined }) => {
     return (
         <div className="max-w-4xl mx-auto my-[80px] space-y-6">
 
-            <h2 className="text-black font-bold text-3xl bg-[#fffff] rounded-md shadow-md py-3">Friendship Analytics</h2>
+            <h2 className="text-black font-bold text-xl text-center md:text-left md:text-3xl bg-[#fffff] rounded-md shadow-md py-3">Friendship Analytics</h2>
 
             <div className='bg-[#ffffff] shadow-xl rounded-xl p-8 '>
                 <p className="text-sm text-[#244D3F]">By Interaction Type</p>
@@ -119,7 +119,7 @@ const StatPage = ({ isAnimationActive = true, defaultIndex = undefined }) => {
                                     ))}
                                 </Pie>
                                 <Tooltip content={() => null} />
-                                <Legend />
+                                <Legend/>
                             </PieChart>
                         </ResponsiveContainer>
                     </div>

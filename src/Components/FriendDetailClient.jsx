@@ -1,16 +1,18 @@
 "use client";
-
-import Image from "next/image";
 import { useEffect } from "react";
+import { UseDataContext } from "@/context/DataContext";
+import Image from "next/image";
 import { RiDeleteBin6Line, RiNotificationSnoozeLine } from "react-icons/ri";
 import { GoArchive } from "react-icons/go";
 import { LuPhoneCall, LuMessageSquare, LuVideo } from "react-icons/lu";
-import { UseDataContext } from "@/context/DataContext";
+import { toast } from "react-toastify";
+
 
 const FriendDetailClient = ({ friend }) => {
     const { data, setData } = UseDataContext();
 
     const handleAudioCall = () => {
+        toast.success(`Call with ${friend.name}`);
         const obj = {
             date: Date.now(),
             type: "audio",
@@ -23,6 +25,7 @@ const FriendDetailClient = ({ friend }) => {
     };
 
     const handleText = () => {
+        toast.success(`Text with ${friend.name}`);
         const obj = {
             date: Date.now(),
             type: "text",
@@ -35,6 +38,7 @@ const FriendDetailClient = ({ friend }) => {
     };
 
     const handleVideoCall = () => {
+        toast.success(`Video with ${friend.name}`);
         const obj = {
             date: Date.now(),
             type: "video",
@@ -45,9 +49,9 @@ const FriendDetailClient = ({ friend }) => {
         setData(prev => [...prev, obj]);
     };
 
-    useEffect(() => {
-        console.log('DataContext data updated:', data);
-    }, [data]);
+    // useEffect(() => {
+    //     console.log('DataContext data updated:', data);
+    // }, [data]);
 
     return (
         <div className='friend-container'>

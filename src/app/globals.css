@@ -1,2 +1,26 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.friend-container{
+    padding:16px;
+     display:flex;
+    justify-content: center;
+    width:100%;
+}
+
+@media screen and (width<768px) and (width>481px){
+    .friend-container{
+        padding:16px 120px;
+        display:flex;
+        justify-content: center;
+        width:100%;
+    }
+}
+
+@media screen and (min-width:768px){
+    .friend-container{
+        padding:20px 150px;
+        
+    }
+}
+

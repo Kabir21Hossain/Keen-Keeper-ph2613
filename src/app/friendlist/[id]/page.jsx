@@ -21,7 +21,7 @@ const Friend = async ({ params }) => {
     }
 
     return (
-        <div className="">
+        <div>
             <FriendDetailClient friend={friend} />
         </div>
     );

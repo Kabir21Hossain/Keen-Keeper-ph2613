@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect } from "react";
 import { RiDeleteBin6Line, RiNotificationSnoozeLine } from "react-icons/ri";
 import { GoArchive } from "react-icons/go";
 import { LuPhoneCall, LuMessageSquare, LuVideo } from "react-icons/lu";
@@ -17,8 +18,8 @@ const FriendDetailClient = ({ friend }) => {
             name: friend.name,
         };
 
-        setData([...data, obj]);
-        console.log(data);
+        console.log('handleAudioCall - pushing:', obj);
+        setData(prev => [...prev, obj]);
     };
 
     const handleText = () => {
@@ -29,8 +30,8 @@ const FriendDetailClient = ({ friend }) => {
             name: friend.name,
         };
 
-        setData([...data, obj]);
-        console.log(data);
+        
+        setData(prev => [...prev, obj]);
     };
 
     const handleVideoCall = () => {
@@ -40,9 +41,13 @@ const FriendDetailClient = ({ friend }) => {
             timestamp: new Date().toISOString(),
             name: friend.name,
         };
-        setData([...data, obj]);
-        console.log(data);
+        
+        setData(prev => [...prev, obj]);
     };
+
+    useEffect(() => {
+        console.log('DataContext data updated:', data);
+    }, [data]);
 
     return (
         <div className='friend-container'>
@@ -117,7 +122,9 @@ const FriendDetailClient = ({ friend }) => {
                     </div>
 
                     <div className="w-full flex flex-col shadow-xl rounded-xl p-6 bg-[#ffffff] space-y-4 flex-1 justify-evenly">
-                        <p className="text-[#244D3F] text-sm">Quick Check-In</p>
+                        <div className="flex justify-between items-center">
+                            <p className="text-[#244D3F] text-sm">Quick Check-In</p>
+                        </div>
 
                         <div className="call-text-video grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <button onClick={handleAudioCall} className="hover:translate-y-0.5 hover:cursor-pointer flex flex-col items-center gap-2 rounded-xl shadow-xl  bg-[#F8FAFC]  p-4  transition-colors">

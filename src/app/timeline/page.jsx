@@ -1,6 +1,6 @@
 "use client"
 import { UseDataContext } from "@/context/DataContext";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import text from '../../assets/text.png';
 import call from '../../assets/call.png';
@@ -10,34 +10,25 @@ import Image from "next/image";
 const TimeLinePage = () => {
     const { data } = UseDataContext();
     const [selectedType, setSelectedType] = useState('');
+    const [sortedData, setSortedData] = useState([...data]);
 
-    const sortOrder = {
-        text: 1,
-        audio: 2,
-        video: 3
-    };
-
-    const sortedData = useMemo(() => {
-        const normalizedType = selectedType.toLowerCase();
-
-        const filtered = selectedType
-            ? data.filter((event) => event.type.toLowerCase() === normalizedType)
-            : data;
-
-        return [...filtered].sort((a, b) => {
-            const orderA = sortOrder[a.type.toLowerCase()] ?? 999;
-            const orderB = sortOrder[b.type.toLowerCase()] ?? 999;
-
-            if (orderA !== orderB) {
-                return orderA - orderB;
-            }
-
-            return new Date(b.timestamp) - new Date(a.timestamp);
-        });
-    }, [data, selectedType]);
 
     const handleSorting = (type) => {
         setSelectedType(type);
+
+        if (!data) {
+            setSortedData([]);
+            return;
+        }
+
+        if (type.toLowerCase() === 'all') {
+            setSortedData([...data]);
+        } else {
+            const filtered = data.filter(
+                (obj) => obj?.type?.toLowerCase() === type.toLowerCase()
+            );
+            setSortedData(filtered);
+        }
     };
 
 
@@ -57,7 +48,7 @@ const TimeLinePage = () => {
                             Filter by {selectedType || 'All'} <FaAngleDown />
                         </div>
                         <ul tabIndex="-1" className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
-                            <li onClick={() => handleSorting('')}><a>All</a></li>
+                            <li onClick={() => handleSorting('all')}><a>All</a></li>
                             <li onClick={() => handleSorting('Text')}><a>Text</a></li>
                             <li onClick={() => handleSorting('Audio')}><a>Audio</a></li>
                             <li onClick={() => handleSorting('Video')}><a>Video</a></li>
